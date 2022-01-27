@@ -32,7 +32,7 @@ class Main {
         }
         
         jugada += 1;
-      }while(jugada <= 2);
+      }while(jugada <= 8);
 
     }
 

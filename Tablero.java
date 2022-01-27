@@ -2,14 +2,11 @@ import java.util.Scanner;
 
 public class Tablero{
   //Atributos
-  String[][] table = new String[6][6];
+  String[][] table = new String[8][8];
   //Métodos
 
   //Creación del tablero
   public void NuevoTablero(){
-
-    //String[][] Medio =new String[1][2];
-    //Medio =
 
     for(int i=2; i<4;i++){
       for(int j=0;j<6;j++){
@@ -59,7 +56,7 @@ public class Tablero{
     Scanner sh = new Scanner(System.in);
     Scanner sh1 = new Scanner(System.in);
     int Temporal1 =0, Temporal2 =0;
-    String Temporal3 = "s";
+    boolean Temporal3 = true;
 
     //Se le pide al usuario la pieza a mover
     System.out.println("Que pieza desea mover?");
@@ -94,7 +91,7 @@ public class Tablero{
     }
 
     if(Letra2.equals("a")){
-      Temporal2 = 1;
+      Temporal2 = 0;
     } 
     else if(Letra2.equals("b")){
       Temporal2 = 1;
@@ -112,18 +109,180 @@ public class Tablero{
       Temporal2 = 5;
     }
 
-    if(table[-(Numero1)+6][Temporal1] == "p-"){
 
-      if((Numero2 == Numero1 + 2 || Numero2 == Numero1 + 1) & Temporal2 == Temporal1 & table[-(Numero2)+6][Temporal2] == "--"){
-        Temporal3 = "--";
-        table[-(Numero2)+ 6][Temporal2] = "p-";
-        table[-(Numero1) + 6][Temporal1] = Temporal3;
+    //Reina_
+    if(table[-(Numero1)+6][Temporal1] == "Q-"){
+      if(Temporal2 > Temporal1 & Numero2 > Numero1 & Temporal2 - Temporal1 == Numero2 - Numero1){
+        for(int i = Numero1 +1 ; i<Numero2 ;i++){
+          if(table[-(i)+6][Temporal1 + (i-Numero1)] == "--"){
+            Temporal3 = true;
+          } else{
+            Temporal3 = false;
+            break;
+          }
+        }
+        if(Temporal3 == true){
+          table[-(Numero2)+6][Temporal2] = "Q-";
+          table[-(Numero1)+6][Temporal1] = "--";
+        }
       }
-      else if((Temporal2 == Temporal1 +1 || Temporal2 == Temporal1 -1) & Numero2 == Numero1 + 1 & table[-(Numero2)+6][Temporal2] != "--"){
-        System.out.println();
-        table[-(Numero2)+6][Temporal2] = "p-";
+      if(Temporal2 < Temporal1 & Numero2 < Numero1 & Temporal2 - Temporal1 == Numero2 - Numero1){
+        for(int i = Numero1 -1 ; i>Numero2 ;i--){
+          if(table[-(i)+6][Temporal1 + (i-Numero1)] == "--"){
+            Temporal3 = true;
+          } else{
+            Temporal3 = false;
+            break;
+          }
+        }
+        if(Temporal3 == true){
+          table[-(Numero2)+6][Temporal2] = "Q-";
+          table[-(Numero1)+6][Temporal1] = "--";
+        }
+      }
+      if(Temporal2 < Temporal1 & Numero2 > Numero1 & Temporal2 - Temporal1 == -(Numero2 - Numero1)){
+        for(int i = Numero1 +1 ; i<Numero2 ;i++){
+          if(table[-(i)+6][Temporal1 - (i-Numero1)] == "--"){
+            Temporal3 = true;
+          } else{
+            Temporal3 = false;
+            break;
+          }
+        }
+        if(Temporal3 == true){
+          table[-(Numero2)+6][Temporal2] = "Q-";
+          table[-(Numero1)+6][Temporal1] = "--";
+        }
+      }
+      if(Temporal2 > Temporal1 & Numero2 < Numero1 & Temporal2 - Temporal1 == -(Numero2 - Numero1)){
+        for(int i = Numero1 -1 ; i>Numero2 ;i--){
+          if(table[-(i)+6][Temporal1 - (i-Numero1)] == "--"){
+            Temporal3 = true;
+          } else{
+            Temporal3 = false;
+            break;
+          }
+        }
+        if(Temporal3 == true){
+          table[-(Numero2)+6][Temporal2] = "Q-";
+          table[-(Numero1)+6][Temporal1] = "--";
+        }
       }
     }
+
+    //Torre_
+    if(table[-(Numero1)+6][Temporal1] == "t-"){
+      if(Temporal2 == Temporal1 & Numero2 > Numero1 & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_" || table[-(Numero2)+6][Temporal2] == "--")){
+        for(int i = Numero1 +1 ; i<Numero2 ;i++){
+          if(table[-(i)+6][Temporal2] == "--"){
+            Temporal3 = true;
+          } else{
+            Temporal3 = false;
+            break;
+          }
+        }
+        if(Temporal3 == true){
+          table[-(Numero2)+6][Temporal2] = "t-";
+          table[-(Numero1)+6][Temporal1] = "--";
+        }
+      }
+      else if(Temporal2 == Temporal1 & Numero2 < Numero1 & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_" || table[-(Numero2)+6][Temporal2] == "--")){
+        for(int i = Numero1 -1 ; i>Numero2 ;i--){
+          if(table[-(i)+6][Temporal2] == "--"){
+            Temporal3 = true;
+          } else{
+            Temporal3 = false;
+            break;
+          }
+        }
+        if(Temporal3 == true){
+          table[-(Numero2)+6][Temporal2] = "t-";
+          table[-(Numero1)+6][Temporal1] = "--";
+        }
+      }
+      else if(Numero2 == Numero1 & Temporal2 > Temporal1 & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_" || table[-(Numero2)+6][Temporal2] == "--") ){
+        for(int i = Temporal1 +1 ; i<Temporal2 ;i++){
+          if(table[-(Numero1)+6][i] == "--"){
+            Temporal3 = true;
+          } else{
+            Temporal3 = false;
+            break;
+          }
+        }
+        if(Temporal3 == true){
+          table[-(Numero2)+6][Temporal2] = "t-";
+          table[-(Numero1)+6][Temporal1] = "--";
+        }
+      }
+      else if(Numero2 == Numero1 & Temporal2 < Temporal1 & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_" || table[-(Numero2)+6][Temporal2] == "--") ){
+        for(int i = Temporal1 -1 ; i>Temporal2 ;i--){
+          if(table[-(Numero1)+6][i] == "--"){
+            Temporal3 = true;
+          } else{
+            Temporal3 = false;
+            break;
+          }
+        }
+        if(Temporal3 == true){
+          table[-(Numero2)+6][Temporal2] = "t-";
+          table[-(Numero1)+6][Temporal1] = "--";
+        }
+      } else{
+        System.out.println("Tu jugada no es valida, tira de nuevo:");
+        Movimiento();
+      }
+    }
+
+    //Rey_
+    if(table[-(Numero1)+6][Temporal1] == "K-"){
+      if((Temporal2 == Temporal1 -1 || Temporal2 == Temporal1 +1 ) & (Numero2 == Numero1 +1 || Numero2 == Numero1 -1 || Numero2 == Numero1) & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_" || table[-(Numero2)+6][Temporal2] == "--")){
+        table[-(Numero2)+6][Temporal2] = "K-";
+        table[-(Numero1)+6][Temporal1] = "--";
+      }
+
+
+      else if(Temporal2 == Temporal1 & (Numero2 == Numero1 +1 || Numero2 == Numero1 -1) & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_" || table[-(Numero2)+6][Temporal2] == "--")){
+        table[-(Numero2)+6][Temporal2] = "K-";
+        table[-(Numero1)+6][Temporal1] = "--";
+      } else{
+        System.out.println("Tu jugada no es valida, tira de nuevo:");
+        Movimiento();
+      }
+    }
+
+    //Caballo_
+    if(table[-(Numero1)+6][Temporal1] == "c-"){
+      if((Temporal2 == Temporal1 -2 || Temporal2 == Temporal1 +2) & (Numero2 == Numero1 +1 || Numero2 == Numero1 -1) & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_" || table[-(Numero2)+6][Temporal2] == "--")){
+        table[-(Numero2)+6][Temporal2] = "c-";
+        table[-(Numero1)+6][Temporal1] = "--";
+      }
+      else if((Temporal2 == Temporal1 -1 || Temporal2 == Temporal1 +1) & (Numero2 == Numero1 +2 || Numero2 == Numero1 -2) & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_" || table[-(Numero2)+6][Temporal2] == "--")){
+        table[-(Numero2)+6][Temporal2] = "c-";
+        table[-(Numero1)+6][Temporal1] = "--";
+      } else{
+        System.out.println("Tu jugada no es valida, tira de nuevo:");
+        Movimiento();
+      }
+    }
+
+    //Peon_
+    else if(table[-(Numero1)+6][Temporal1] == "p-"){
+
+      if((Numero2 == Numero1 + 2 || Numero2 == Numero1 + 1) & Temporal2 == Temporal1 & table[-(Numero2)+6][Temporal2] == "--"){
+        table[-(Numero2)+ 6][Temporal2] = "p-";
+        table[-(Numero1) + 6][Temporal1] = "--";
+      }
+      else if((Temporal1 == Temporal2 + 1 || Temporal1 == Temporal2 -1) & Numero2 == Numero1 + 1 & (table[-(Numero2)+6][Temporal2] == "p_" || table[-(Numero2)+6][Temporal2] == "t_" || table[-(Numero2)+6][Temporal2] == "Q_" || table[-(Numero2)+6][Temporal2] == "c_" || table[-(Numero2)+6][Temporal2] == "K_")){
+        System.out.println();
+        table[-(Numero2)+6][Temporal2] = "p-";
+        table[-(Numero1)+6][Temporal1] = "--";
+      } else{
+        System.out.println("Tu jugada no es valida, tira de nuevo:");
+        Movimiento();
+      }
+    }
+
+    
     
     
     
